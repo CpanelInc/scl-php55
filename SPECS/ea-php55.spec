@@ -1,7 +1,3 @@
-%if 0%{?rhel} == 7
-%global debug_package %{nil}
-%endif
-
 # Defining the package namespace
 # NOTE: pkg variable is a hack to fix invalid macro inside of macros.php
 %global ns_name ea
@@ -153,7 +149,7 @@ Vendor:   cPanel, Inc.
 Name:     %{?scl_prefix}php
 Version:  5.5.38
 # Doing release_prefix this way for Release allows for OBS-proof versioning, See EA-4580 for more details
-%define release_prefix 59
+%define release_prefix 60
 Release: %{release_prefix}%{?dist}.cpanel
 # All files licensed under PHP version 3.01, except
 # Zend is licensed under Zend
@@ -1917,6 +1913,9 @@ fi
 
 
 %changelog
+* Wed May 10 2023 Brian Mendoza <brian.mendoza@cpanel.net> - 5.5.38-60
+- ZC-10936: Clean up Makefile and remove debug-package-nil
+
 * Wed Mar 02 2022 Travis Holloway <t.holloway@cpanel.net> - 5.5.38-59
 - EA-10532: Update litespeed to 8.0.1
 
