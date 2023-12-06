@@ -152,7 +152,7 @@ Vendor:   cPanel, Inc.
 Name:     %{?scl_prefix}php
 Version:  5.5.38
 # Doing release_prefix this way for Release allows for OBS-proof versioning, See EA-4580 for more details
-%define release_prefix 61
+%define release_prefix 62
 Release: %{release_prefix}%{?dist}.cpanel
 # All files licensed under PHP version 3.01, except
 # Zend is licensed under Zend
@@ -194,6 +194,7 @@ Patch104: php-5.5.x-fpm-user-ini-docroot.patch
 Patch105: php-5.5.x-fpm-jailshell.patch
 Patch106: php-5.5.38-ftp-init-openssl.patch
 Patch200: php-fpm.epoll.patch
+Patch201: 0001-Update-libxml-include-file-references.patch
 
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
@@ -1028,6 +1029,7 @@ inside them.
 %patch105 -p1 -b .fpmjailshell
 %patch106 -p1 -b .ftpinitopenssl
 %patch200 -p1 -b .fpmepoll
+%patch201 -p1 -b .libxml
 sed -i 's/buffio.h/tidybuffio.h/' ext/tidy/*.c
 
 # Prevent %%doc confusion over LICENSE files
@@ -1916,6 +1918,9 @@ fi
 
 
 %changelog
+* Tue Nov 21 2023 Tim Mullin <tim@cpanel.net> - 5.5.38-62
+- EA-11821: Patch to build with the latest ea-libxml2
+
 * Wed May 17 2023 Julian Brown <julian.brown@cpanel.net> - 5.5.38-61
 - ZC-10950: Fix build problems
 
